@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo, setEditingTodoId } from "../features/todo/todoSlice";
+import { removeTodo, updateTodo } from "../features/todo/todoSlice";
+
 function Todo() {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-  const editHandler = (id) => {
-    dispatch(setEditingTodoId(id));
+  const [editingTodoId, setEditingTodoId] = useState(null);
+  const [editedText, setEditedText] = useState("");
+
+  const updateHandler = (id, text) => {
+    setEditingTodoId(id);
+    setEditedText(text);
   };
+
+  const saveEditHandler = (id) => {
+    dispatch(updateTodo({ id, newText: editedText }));
+    setEditingTodoId(null);
+    setEditedText("");
+  };
+
   return (
     <>
       <ul className="list-none">
@@ -15,15 +27,36 @@ function Todo() {
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className="text-white">{todo.text}</div>
+            {/* Render input field if currently editing todo */}
+            {editingTodoId === todo.id ? (
+              <input
+                type="text"
+                value={editedText}
+                onChange={(e) => setEditedText(e.target.value)}
+                className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField"
+              />
+            ) : (
+              <div className="text-white">{todo.text}</div>
+            )}
             <div className="flex">
-              <button
-                type="button"
-                onClick={() => editHandler(todo.id)}
-                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  text-sm  text-center me-7 mb-0 align-middle justify-end bg-blue-500 hover:bg-blue-700 font-bold py-2 px-5 rounded"
-              >
-                Edit
-              </button>
+              {/* Render Edit or Update button based on editing state */}
+              {editingTodoId === todo.id ? (
+                <button
+                  type="button"
+                  onClick={() => saveEditHandler(todo.id)}
+                  className="text-white bg-green-500  text-sm  text-center me-7 mb-0 focus:outline-none align-middle hover:bg-green-600 justify-end font-bold py-2 px-5 rounded"
+                >
+                  Update
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => updateHandler(todo.id, todo.text)}
+                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  text-sm  text-center me-7 mb-0 align-middle justify-end bg-blue-500 hover:bg-blue-700 font-bold py-2 px-5 rounded"
+                >
+                  Edit
+                </button>
+              )}
 
               <button
                 onClick={() => dispatch(removeTodo(todo.id))}
