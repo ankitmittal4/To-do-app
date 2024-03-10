@@ -29,8 +29,11 @@ export const todoSlice = createSlice({
     setEditingTodoId: (state, action) => {
       state.edititngTodoId = action.payload;
     },
+    setTodos: (state, action) => {
+      state.todos = action.payload;
+    },
   },
 });
-export const { addTodo, removeTodo, setEditingTodoId, updateTodo } =
+export const { addTodo, removeTodo, setEditingTodoId, updateTodo, setTodos } =
   todoSlice.actions;
 export default todoSlice.reducer;

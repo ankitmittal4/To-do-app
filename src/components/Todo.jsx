@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo, updateTodo } from "../features/todo/todoSlice";
+import { setTodos, removeTodo, updateTodo } from "../features/todo/todoSlice";
 
 function Todo() {
   const todos = useSelector((state) => state.todos);
@@ -19,12 +19,25 @@ function Todo() {
     setEditedText("");
   };
 
+  useEffect(() => {
+    const todosJSON = localStorage.getItem("todos");
+    if (todosJSON) {
+      const parsedTodos = JSON.parse(todosJSON);
+
+      dispatch(setTodos(parsedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <>
       <ul className="list-none">
         {todos.map((todo) => (
           <li
-            className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
+            className="mt-4 mx-36 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
             {/* Render input field if currently editing todo */}
