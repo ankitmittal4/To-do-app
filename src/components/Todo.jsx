@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTodos, removeTodo, updateTodo } from "../features/todo/todoSlice";
 
@@ -7,6 +7,7 @@ function Todo() {
   const dispatch = useDispatch();
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [editedText, setEditedText] = useState("");
+  const inputRef = useRef(null);
 
   const updateHandler = (id, text) => {
     setEditingTodoId(id);
@@ -19,6 +20,11 @@ function Todo() {
     setEditedText("");
   };
 
+  const setUpdateOnEnter = (e, todoId) => {
+    if (e.key === "Enter") {
+      saveEditHandler(todoId);
+    }
+  };
   useEffect(() => {
     const todosJSON = localStorage.getItem("todos");
     if (todosJSON) {
@@ -32,6 +38,11 @@ function Todo() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  useEffect(() => {
+    if (editingTodoId != null && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editingTodoId]);
   return (
     <>
       <ul className="list-none">
@@ -40,19 +51,19 @@ function Todo() {
             className="mt-4 mx-36 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            {/* Render input field if currently editing todo */}
             {editingTodoId === todo.id ? (
               <input
+                ref={inputRef}
                 type="text"
                 value={editedText}
                 onChange={(e) => setEditedText(e.target.value)}
+                onKeyDown={(e) => setUpdateOnEnter(e, todo.id)}
                 className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField"
               />
             ) : (
               <div className="text-white">{todo.text}</div>
             )}
             <div className="flex">
-              {/* Render Edit or Update button based on editing state */}
               {editingTodoId === todo.id ? (
                 <button
                   type="button"
