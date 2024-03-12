@@ -3,12 +3,16 @@ import "./App.css";
 import AddTodo from "./components/AddTodo";
 import Todo from "./components/Todo";
 import Navbar from "./components/Navbar";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <AddTodo />
-      <Todo />
+      <Todo /> */}
+      {/* <Login /> */}
+      <Signup />
     </>
   );
 }
