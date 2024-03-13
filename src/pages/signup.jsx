@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,19 +17,14 @@ const Signup = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Usrrname:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("profile Picture:", profilePicture);
-  };
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
+    console.log("File : ", file);
     setProfilePicture(file);
 
     const reader = new FileReader();
@@ -38,6 +34,33 @@ const Signup = () => {
     reader.readAsDataURL(file);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Usrrname:", username);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("profile Picture:", profilePicture);
+    console.log("Image URL :", imageUrl);
+
+    try {
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("profilePicture", profilePicture);
+
+      const response = await axios.post("url", formData, {
+        Headers: {
+          "content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Signup successful", response.data);
+      //redirect or display success msg
+    } catch (error) {
+      console.error("Signup Failed", error);
+      //displays error msg to user
+    }
+  };
   return (
     <div className="min-h-screen flex justify-evenly bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="flex flex-col justify-top w-1/3">
