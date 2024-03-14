@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -173,12 +174,12 @@ const Signup = () => {
           <div>
             <span>Already have an account? </span>
 
-            <a
-              href="#"
+            <Link
+              to="/login"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Login
-            </a>
+            </Link>
           </div>
         </form>
       </div>
