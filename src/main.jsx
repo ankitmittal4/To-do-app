@@ -34,9 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   //   <App />
   // </Provider>
 
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
