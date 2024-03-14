@@ -1,5 +1,6 @@
 import React from "react";
 // import "./style.css";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
@@ -13,12 +14,18 @@ const Header = () => {
           <span className="text-white text-lg font-bold">To-Do App</span>
         </div>
         <div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <Link
+            to="/login"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Login
-          </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">
+          </Link>
+          <Link
+            to="/signup"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+          >
             Sign/Up
-          </button>
+          </Link>
         </div>
       </nav>
     </>

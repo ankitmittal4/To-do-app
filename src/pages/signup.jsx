@@ -49,11 +49,15 @@ const Signup = () => {
       formData.append("password", password);
       formData.append("profilePicture", profilePicture);
 
-      const response = await axios.post("url", formData, {
-        Headers: {
-          "content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "https://to-do-0j63.onrender.com/",
+        formData,
+        {
+          Headers: {
+            "content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log("Signup successful", response.data);
       //redirect or display success msg
     } catch (error) {
