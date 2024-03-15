@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +12,8 @@ const Signup = () => {
   );
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -65,6 +67,7 @@ const Signup = () => {
       if (response.data) {
         setSuccessMsg(true);
         setErrorMsg(false);
+        navigate("/");
       }
 
       //redirect or display success msg
