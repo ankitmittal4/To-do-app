@@ -12,6 +12,8 @@ const Login = () => {
 
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [loginError, setLoginError] = useState("Account Not Found!!!");
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -71,13 +73,14 @@ const Login = () => {
       if (error.response.request.status === 400) {
         setErrorMsg(true);
         setSuccessMsg(false);
+        setLoginError(error.response.data.message);
       }
       //displays error msg to user
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col justify-center bg-gray-300 py-12 px-4 sm:px-6 lg:px-8">
       {successMsg ? (
         <p className="text-xl font-medium text-green-600 inline-block">
           ---- Login Successful ----
@@ -88,7 +91,7 @@ const Login = () => {
         </p>
       ) : errorMsg ? (
         <p className="text-xl font-medium text-red-500  inline-block ">
-          Account not found !!!
+          {loginError} !!!
         </p>
       ) : (
         <p></p>

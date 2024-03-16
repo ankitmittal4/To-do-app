@@ -58,7 +58,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 p-4 flex justify-between items-center">
+      <nav className="bg-gray-800 p-4 flex justify-between items-center mb-0 ">
         <div className="flex items-center">
           <img
             src="https://user-images.githubusercontent.com/1711854/28282651-29665d66-6af9-11e7-96d1-e9346a836007.png"
@@ -76,7 +76,6 @@ const Header = () => {
               >
                 Login
               </Link>
-
               <Link
                 to="/signup"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"

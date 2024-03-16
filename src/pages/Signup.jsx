@@ -110,7 +110,7 @@ const Signup = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8 py-3">
+    <div className="min-h-screen bg-gray-300 px-4 sm:px-6 lg:px-8 py-3">
       {successMsg ? (
         <p className="text-xl font-medium text-green-600 inline-block">
           ---- Sign Up Successful ----
@@ -126,7 +126,7 @@ const Signup = () => {
       ) : (
         <p></p>
       )}
-      <div className="flex justify-evenly bg-gray-50 py-9">
+      <div className="flex justify-evenly bg-gray-300 py-9">
         <div className="flex flex-col justify-top w-1/3">
           <h2 className="mt-16 mb-16 text-center text-5xl font-extrabold text-gray-900 ">
             Create an Account
