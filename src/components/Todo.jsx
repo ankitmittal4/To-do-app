@@ -45,7 +45,7 @@ function Todo() {
   }, [editingTodoId]);
   return (
     <>
-      <ul className="list-none">
+      <ul className="list-none mb-8">
         {todos.map((todo) => (
           <li
             className="mt-4 mx-36 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"

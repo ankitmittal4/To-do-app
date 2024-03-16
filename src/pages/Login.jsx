@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken } from "../features/todo/todoSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +11,8 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -20,8 +24,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
 
     try {
       const formData = new FormData();
@@ -33,13 +37,19 @@ const Login = () => {
         formData
       );
       const token = response.data.data.accessToken;
+      // console.log("Login successful : Token", token);
       console.log("Login successful", response.data);
-      if (response.data) {
+      if (token) {
         setSuccessMsg(true);
         setErrorMsg(false);
-        localStorage.setItem("token", JSON.stringify(token));
+        dispatch(setToken(token));
+        localStorage.setItem("token", token);
         navigate("/");
       }
+      // else {
+      //   setErrorMsg(true);
+      //   setSuccessMsg(false);
+      // }
 
       //redirect or display success msg
     } catch (error) {

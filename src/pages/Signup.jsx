@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../features/todo/todoSlice";
+import { setImageURL } from "../features/todo/todoSlice";
+import { setActiveUser } from "../features/todo/todoSlice";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +18,8 @@ const Signup = () => {
   const [errorMsg, setErrorMsg] = useState(false);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -63,10 +69,32 @@ const Signup = () => {
           },
         }
       );
-      console.log("Signup successful", response.data);
+      console.log("Signup successful : ", response.data);
+      // console.log("Signup Token : ", response.data.data.token);
+
+      const imageURL = response.data.data.profilePicture;
+      console.log("Signup Profile picture : ", imageURL);
+
+      const token = response.data.data.accessToken;
+      console.log("Signup successful : Token : ", token);
+
+      const name = response.data.data.name;
+      console.log("Signup successful : Username : ", name);
+
+      if (name) {
+        // dispatch(setActiveUser(name));
+        localStorage.setItem("username", name);
+      }
+
+      if (imageURL) {
+        dispatch(setImageURL(imageURL));
+        localStorage.setItem("image", imageURL);
+      }
       if (response.data) {
         setSuccessMsg(true);
         setErrorMsg(false);
+        dispatch(setToken(token));
+        localStorage.setItem("token", token);
         navigate("/");
       }
 

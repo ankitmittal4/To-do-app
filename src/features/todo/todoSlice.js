@@ -32,8 +32,25 @@ export const todoSlice = createSlice({
     setTodos: (state, action) => {
       state.todos = action.payload;
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    setImageURL: (state, action) => {
+      state.imageURL = action.payload;
+    },
+    setActiveUser: (state, action) => {
+      state.name = action.payload;
+    },
   },
 });
-export const { addTodo, removeTodo, setEditingTodoId, updateTodo, setTodos } =
-  todoSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  setEditingTodoId,
+  updateTodo,
+  setTodos,
+  setToken,
+  setImageURL,
+  setActiveUser,
+} = todoSlice.actions;
 export default todoSlice.reducer;
