@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setToken } from "../features/todo/todoSlice";
+import { setActiveUser } from "../features/todo/todoSlice";
+import { setImageURL } from "../features/todo/todoSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,13 +39,24 @@ const Login = () => {
         formData
       );
       const token = response.data.data.accessToken;
+      const username = response.data.data.name;
+      const imageURL = response.data.data.profilePicture;
       // console.log("Login successful : Token", token);
       console.log("Login successful", response.data);
       if (token) {
         setSuccessMsg(true);
         setErrorMsg(false);
+
         dispatch(setToken(token));
         localStorage.setItem("token", token);
+
+        dispatch(setActiveUser(username));
+        localStorage.setItem("username", username);
+        if (imageURL) {
+          dispatch(setImageURL(imageURL));
+          localStorage.setItem("image", imageURL);
+        }
+
         navigate("/");
       }
       // else {

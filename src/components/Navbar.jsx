@@ -3,38 +3,58 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/todo/todoSlice";
+import { setActiveUser } from "../features/todo/todoSlice";
+import { setImageURL } from "../features/todo/todoSlice";
+import { setTodos } from "../features/todo/todoSlice";
+
 const Header = () => {
   const [profilePicture, setProfilePicture] = useState(
     "https://i.pinimg.com/736x/b1/88/c6/b188c6801ad1d71d3c962c6e4aa2d0cf.jpg"
   );
-  const [username, setUsername] = useState("Ankit");
+  const [username, setUsername] = useState("");
 
   const dispatch = useDispatch();
+
   const token = useSelector((state) => state.token);
   useEffect(() => {
     const tokenId = localStorage.getItem("token");
     if (tokenId) {
       dispatch(setToken(tokenId));
     }
-  }, []);
+  }, [token]);
   // console.log("Token in Navbar : ", token);
 
-  // const imageURL = useSelector((state) => state.imageURL);
-  useEffect(() => {
-    const profileImageURL = localStorage.getItem("image");
-    if (profileImageURL) {
-      // console.log("Image in Navbar: ", profileImageURL);
-      setProfilePicture(profileImageURL);
-    }
-  }, [profilePicture]);
-
+  const profilename = useSelector((state) => state.name);
   useEffect(() => {
     const activeUser = localStorage.getItem("username");
     if (activeUser) {
-      // console.log("Image in Navbar: ", profileImageURL);
+      dispatch(setActiveUser(activeUser));
       setUsername(activeUser);
     }
-  }, []);
+  }, [profilename]);
+
+  const imageURL = useSelector((state) => state.imageURL);
+  useEffect(() => {
+    const profileImageURL = localStorage.getItem("image");
+    if (profileImageURL) {
+      dispatch(setImageURL(profileImageURL));
+      setProfilePicture(profileImageURL);
+    }
+  }, [imageURL]);
+
+  const handleLogout = () => {
+    dispatch(setToken(null));
+    localStorage.setItem("token", "");
+
+    dispatch(setActiveUser(null));
+    localStorage.setItem("username", "");
+
+    dispatch(setImageURL(null));
+    localStorage.setItem("image", "");
+
+    dispatch(setTodos([]));
+    localStorage.setItem("todos", []);
+  };
 
   return (
     <>
@@ -76,7 +96,8 @@ const Header = () => {
                 Hello, {username}
               </p>
               <Link
-                to="/logout"
+                to="/"
+                onClick={() => handleLogout()}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
               >
                 Logout
