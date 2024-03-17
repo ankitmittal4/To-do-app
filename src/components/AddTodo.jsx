@@ -2,15 +2,37 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
+import axios from "axios";
 function AddTodo() {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
-  const addTodoHandler = (e) => {
+  const token = useSelector((state) => state.token);
+  // console.log("Token: ", token);
+  const addTodoHandler = async (e) => {
     e.preventDefault();
     if (input.trim().length === 0) return;
-    dispatch(addTodo(input));
-    setInput("");
+
+    try {
+      const response = await axios.post(
+        "https://to-do-0j63.onrender.com/api/todo/add/",
+        { text: input },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log("Added Todo: ", response.data);
+        dispatch(addTodo({ text: input, todoId: response.data.data.todoId }));
+        setInput("");
+      } else {
+        throw new Error("Failed to add Todo");
+      }
+    } catch (error) {
+      console.log("Error in Adding Todo: ", error);
+    }
   };
 
   return (

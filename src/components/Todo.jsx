@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import { setTodos, removeTodo, updateTodo } from "../features/todo/todoSlice";
+import axios from "axios";
 
 function Todo() {
   const todos = useSelector((state) => state.todos);
@@ -8,16 +10,91 @@ function Todo() {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [editedText, setEditedText] = useState("");
   const inputRef = useRef(null);
+  const token = useSelector((state) => state.token);
+  // console.log("Token: ", token);
 
+  const fetchUserTodos = async () => {
+    try {
+      const response = await axios.post(
+        "https://to-do-0j63.onrender.com/api/todo/List/",
+        {
+          page: 1,
+          limit: 50,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log("Todos Listing: ", response.data);
+        dispatch(setTodos(response.data.data));
+      } else {
+        console.log("Failed in Listing: ");
+      }
+    } catch (error) {
+      console.log("Error in Listing", error);
+    }
+  };
+  useEffect(() => {
+    // fetchUserTodos();
+  }, []);
   const updateHandler = (id, text) => {
     setEditingTodoId(id);
     setEditedText(text);
   };
 
-  const saveEditHandler = (id) => {
-    dispatch(updateTodo({ id, newText: editedText }));
-    setEditingTodoId(null);
-    setEditedText("");
+  const saveEditHandler = async (id) => {
+    console.log("Todo id: ", id);
+    try {
+      const response = await axios.post(
+        "https://to-do-0j63.onrender.com/api/todo/update/",
+        { todoId: id, text: editedText },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Update Todo: ", response.data);
+        dispatch(updateTodo({ id, newText: editedText }));
+        setEditingTodoId(null);
+        setEditedText("");
+      } else {
+        throw new Error("Failed in Update!!!");
+      }
+    } catch (error) {
+      console.log("Error in Update: ", error.response.data);
+    }
+  };
+  // const deleteHandler = async (id) => {
+  //   dispatch(removeTodo(id));
+  // };
+  const deleteHandler = async (id) => {
+    console.log("Todo id: ", id);
+    try {
+      const response = await axios.post(
+        "https://to-do-0j63.onrender.com/api/todo/delete",
+        { todoId: id },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Delete Todo: ", response.data);
+        dispatch(removeTodo(id));
+      } else {
+        throw new Error("Failed in Delete!!!");
+      }
+    } catch (error) {
+      console.log("Error in Delete: ", error.response.data);
+    }
   };
 
   const setUpdateOnEnter = (e, todoId) => {
@@ -50,6 +127,7 @@ function Todo() {
           <li
             className="mt-4 mx-36 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
+            // key={nanoid()}
           >
             {editingTodoId === todo.id ? (
               <input
@@ -83,7 +161,8 @@ function Todo() {
               )}
 
               <button
-                onClick={() => dispatch(removeTodo(todo.id))}
+                // onClick={() => dispatch(removeTodo(todo.id))}
+                onClick={() => deleteHandler(todo.id)}
                 className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
               >
                 <svg
