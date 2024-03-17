@@ -102,18 +102,19 @@ function Todo() {
       saveEditHandler(todoId);
     }
   };
-  useEffect(() => {
-    const todosJSON = localStorage.getItem("todos");
-    if (todosJSON) {
-      const parsedTodos = JSON.parse(todosJSON);
 
-      dispatch(setTodos(parsedTodos));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const todosJSON = localStorage.getItem("todos");
+  //   if (todosJSON) {
+  //     const parsedTodos = JSON.parse(todosJSON);
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  //     dispatch(setTodos(parsedTodos));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   useEffect(() => {
     if (editingTodoId != null && inputRef.current) {
