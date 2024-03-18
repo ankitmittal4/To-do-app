@@ -126,9 +126,9 @@ const Signup = () => {
       ) : (
         <p></p>
       )}
-      <div className="flex flex-col lg:flex-row justify-evenly bg-gray-300 py-9">
+      <div className="flex flex-col lg:flex-row justify-evenly bg-gray-300 py-3">
         <div className="flex flex-col justify-top lg:w-1/3">
-          <h2 className="mt-16 mb-16 text-center lg:text-left text-5xl font-extrabold text-gray-900  ">
+          <h2 className="mt-0 lg:mt-16 mb-10 text-center lg:text-left text-3xl lg:text-5xl font-extrabold text-gray-900  ">
             Create an Account
           </h2>
           <div className="flex justify-center lg:justify-start">
@@ -138,38 +138,33 @@ const Signup = () => {
             />
           </div>
         </div>
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <div className="flex justify-center lg:justify-end mb-1">
-              <img
-                src={imageUrl}
-                alt="Random Profile"
-                className="w-24 h-24 lg:ml-auto rounded-full"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              {/* <span className="text-gray-500 text-sm mb-1">No file chosen</span> */}
-              <label
-                htmlFor="profile-picture"
-                className="cursor-pointer px-3 py-2 focus:outline-none mt-0 text-blue-600"
-              >
-                Upload Image
-              </label>
-              <input
-                id="profile-picture"
-                name="profile-picture"
-                type="file"
-                onChange={handleProfilePictureChange}
-                className="hidden"
-              />
-            </div>
-
-            {/* <h2 className="mt-14 mb-16 text-center text-4xl font-extrabold text-gray-900">
-            Create an Account
-          </h2> */}
+        <div className="max-w-md w-full space-y-1">
+          <div className="flex justify-center lg:justify-center mb-1">
+            <img
+              src={imageUrl}
+              alt="Random Profile"
+              className="w-24 h-24 mx-auto lg:mx-auto rounded-full mb-0"
+            />
           </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+          <div className="flex flex-col mb-24">
+            {/* <span className="text-gray-500 text-sm mb-1">No file chosen</span> */}
+            <label
+              htmlFor="profile-picture"
+              className="cursor-pointer px-3 py-2 focus:outline-none mt-0 text-blue-600"
+            >
+              Upload Image
+            </label>
+            <input
+              id="profile-picture"
+              name="profile-picture"
+              type="file"
+              onChange={handleProfilePictureChange}
+              className="hidden"
+            />
+          </div>
+
+          <form className="mt-8 space-y-9" onSubmit={handleSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -225,7 +220,7 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-8"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt"
               >
                 Sign Up
               </button>
