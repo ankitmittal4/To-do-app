@@ -126,25 +126,25 @@ const Signup = () => {
       ) : (
         <p></p>
       )}
-      <div className="flex justify-evenly bg-gray-300 py-9">
-        <div className="flex flex-col justify-top w-1/3">
-          <h2 className="mt-16 mb-16 text-center text-5xl font-extrabold text-gray-900 ">
+      <div className="flex flex-col lg:flex-row justify-evenly bg-gray-300 py-9">
+        <div className="flex flex-col justify-top lg:w-1/3">
+          <h2 className="mt-16 mb-16 text-center lg:text-left text-5xl font-extrabold text-gray-900  ">
             Create an Account
           </h2>
-          <div className="flex justify-evenly">
+          <div className="flex justify-center lg:justify-start">
             <img
               src="https://images.pexels.com/photos/10718307/pexels-photo-10718307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              className="w-full h-4/5 rounded-md"
+              className="w-full h-4/5 lg:w-auto lg:h-auto rounded-md hidden lg:block"
             />
           </div>
         </div>
         <div className="max-w-md w-full space-y-8">
           <div>
-            <div className="flex justify-center mb-1">
+            <div className="flex justify-center lg:justify-end mb-1">
               <img
                 src={imageUrl}
                 alt="Random Profile"
-                className="w-24 h-24 rounded-full"
+                className="w-24 h-24 lg:ml-auto rounded-full"
               />
             </div>
 
@@ -152,7 +152,7 @@ const Signup = () => {
               {/* <span className="text-gray-500 text-sm mb-1">No file chosen</span> */}
               <label
                 htmlFor="profile-picture"
-                className="cursor-pointer  px-3 py-2 focus:outline-none mt-0 text-blue-600"
+                className="cursor-pointer px-3 py-2 focus:outline-none mt-0 text-blue-600"
               >
                 Upload Image
               </label>
