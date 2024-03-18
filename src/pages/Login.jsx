@@ -82,7 +82,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center bg-gray-300 py-12 px-4 sm:px-6 lg:px-8">
       {successMsg ? (
-        <p className="text-xl font-medium text-green-600 inline-block">
+        <p className="text-xl font-medium text-green-600 text-center mb-8">
           ---- Login Successful ----
           <Link
             to="/"
@@ -90,14 +90,14 @@ const Login = () => {
           ></Link>
         </p>
       ) : errorMsg ? (
-        <p className="text-xl font-medium text-red-500  inline-block ">
+        <p className="text-xl font-medium text-red-500 text-center mb-8">
           {loginError} !!!
         </p>
       ) : (
         <p></p>
       )}
       <div className="flex justify-center">
-        <div className="max-w-md w-full space-y-8 ">
+        <div className="w-full sm:max-w-md space-y-8">
           <div>
             <h2 className="mt-16 mb-16 text-center text-4xl font-extrabold text-gray-900">
               Welcome Back!
@@ -118,7 +118,7 @@ const Login = () => {
                   required
                   value={email}
                   onChange={handleEmailChange}
-                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm mb-4"
+                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm mb-4"
                   placeholder="Email address"
                 />
               </div>
@@ -134,7 +134,7 @@ const Login = () => {
                   required
                   value={password}
                   onChange={handlePasswordChange}
-                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
@@ -157,9 +157,8 @@ const Login = () => {
                 Login
               </button>
             </div>
-            <div>
+            <div className="text-center">
               <span>New User? </span>
-
               <Link
                 to="/signup"
                 className="font-medium text-blue-600 hover:text-blue-500"
