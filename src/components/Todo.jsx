@@ -16,7 +16,7 @@ function Todo() {
   const fetchUserTodos = async () => {
     try {
       const response = await axios.post(
-        "https://to-do-0j63.onrender.com/api/todo/List/",
+        "https://to-do-0j63.onrender.com/api/todo/list/",
         {
           page: 1,
           limit: 50,
@@ -29,7 +29,11 @@ function Todo() {
       );
       if (response.status === 200) {
         console.log("Todos Listing: ", response.data);
-        dispatch(setTodos(response.data.data));
+        const todos = response.data.data.map((todo) => ({
+          id: todo.todoId,
+          text: todo.text,
+        }));
+        dispatch(setTodos(todos));
       } else {
         console.log("Failed in Listing: ");
       }
@@ -38,7 +42,7 @@ function Todo() {
     }
   };
   useEffect(() => {
-    // fetchUserTodos();
+    fetchUserTodos();
   }, []);
   const updateHandler = (id, text) => {
     setEditingTodoId(id);
