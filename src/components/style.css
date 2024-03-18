@@ -1,4 +1,4 @@
-*{
+/* *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -7,4 +7,10 @@
     height: 65px;
     width: 100%;
     background-color: rgba(69, 21, 21, 0.924)
-}
+} */
+@media (min-width: 1024px) {
+    .hidden-on-laptop {
+      display: none;
+    }
+  }
+  

@@ -6,6 +6,7 @@ import { setToken } from "../features/todo/todoSlice";
 import { setActiveUser } from "../features/todo/todoSlice";
 import { setImageURL } from "../features/todo/todoSlice";
 import { setTodos } from "../features/todo/todoSlice";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Header = () => {
   const [profilePicture, setProfilePicture] = useState(
@@ -58,48 +59,52 @@ const Header = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 p-4 flex justify-between items-center mb-0 ">
+      <nav className="bg-gray-800 p-2 sm:p-3 flex justify-between items-center mb-0 ">
         <div className="flex items-center">
           <img
             src="https://user-images.githubusercontent.com/1711854/28282651-29665d66-6af9-11e7-96d1-e9346a836007.png"
             alt="Project Logo"
-            className="h-8 mr-2"
+            className="h-6 sm:h-8 mr-2"
           />
-          <span className="text-white text-lg font-bold">To-Do App</span>
+          <span className="text-white text-base sm:text-lg font-bold">
+            To-Do App
+          </span>
+          {/* <LogoutIcon className="text-white" /> */}
         </div>
         <div>
           {!token ? (
             <>
               <Link
                 to="/login"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded text-xs sm:text-base"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded ml-2 sm:ml-4 text-xs sm:text-base"
               >
                 Sign/Up
               </Link>
             </>
           ) : (
-            <div className="flex justify-center mb-1 items-center">
+            <div className="flex  items-center">
               <img
                 src={profilePicture}
-                // src="http://res.cloudinary.com/video-tube/image/upload/v1710526120/zvvckjcwowhg98lzo4nu.png"
                 alt="Random Profile"
-                className="w-8 h-8 rounded-full"
+                className="w-6 h-6 sm:w-8 sm:h-8 rounded-full"
               />
-              <p className="text-white justify-center text-center max-w-md w-full pl-2 pr-8">
-                Hello, {username}
+              <p className="text-white ml-1 sm:ml-2 text-sm sm:text-base">
+                <span className="hidden md:inline">Hello,</span>{" "}
+                <span className="md:hidden lg:hidden">Hi,</span> {username}
               </p>
-              <Link
-                to="/"
-                onClick={() => handleLogout()}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-              >
-                Logout
+              <Link to="/" onClick={() => handleLogout()} className="">
+                <span className="hidden md:inline bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:py-2 sm:px-4 rounded ml-2 sm:ml-4 text-xs sm:text-base">
+                  Logout
+                </span>{" "}
+                <span className="md:hidden lg:hidden text-white  hover:bg-gray-700 font-bold ml-2 p-1 rounded pb-2">
+                  <LogoutIcon />
+                </span>
               </Link>
             </div>
           )}
