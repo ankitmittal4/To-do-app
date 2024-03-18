@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../features/todo/todoSlice";
+import { addTodo, updateTodo } from "../features/todo/todoSlice";
 import axios from "axios";
+import { nanoid } from "@reduxjs/toolkit";
 function AddTodo() {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ function AddTodo() {
   const addTodoHandler = async (e) => {
     e.preventDefault();
     if (input.trim().length === 0) return;
+    setInput("");
+    dispatch(addTodo({ text: input, todoId: nanoid() }));
 
     try {
       const response = await axios.post(
@@ -25,8 +28,7 @@ function AddTodo() {
       );
       if (response.status === 200) {
         console.log("Added Todo: ", response.data);
-        dispatch(addTodo({ text: input, todoId: response.data.data.todoId }));
-        setInput("");
+        dispatch(updateTodo({ id: response.data.data.todoId, newText: input }));
       } else {
         throw new Error("Failed to add Todo");
       }

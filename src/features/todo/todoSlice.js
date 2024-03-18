@@ -25,6 +25,7 @@ export const todoSlice = createSlice({
       const todoToUpdate = state.todos.find((todo) => todo.id === id);
       if (todoToUpdate) {
         todoToUpdate.text = newText;
+        todoToUpdate.id = id;
       }
     },
     setEditingTodoId: (state, action) => {

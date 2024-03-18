@@ -50,6 +50,9 @@ function Todo() {
   };
 
   const saveEditHandler = async (id) => {
+    dispatch(updateTodo({ id, newText: editedText }));
+    setEditingTodoId(null);
+    setEditedText("");
     console.log("Todo id: ", id);
     try {
       const response = await axios.post(
@@ -64,9 +67,9 @@ function Todo() {
 
       if (response.status === 200) {
         console.log("Update Todo: ", response.data);
-        dispatch(updateTodo({ id, newText: editedText }));
-        setEditingTodoId(null);
-        setEditedText("");
+        // dispatch(updateTodo({ id, newText: editedText }));
+        // setEditingTodoId(null);
+        // setEditedText("");
       } else {
         throw new Error("Failed in Update!!!");
       }
@@ -78,6 +81,7 @@ function Todo() {
   //   dispatch(removeTodo(id));
   // };
   const deleteHandler = async (id) => {
+    dispatch(removeTodo(id));
     console.log("Todo id: ", id);
     try {
       const response = await axios.post(
@@ -92,7 +96,6 @@ function Todo() {
 
       if (response.status === 200) {
         console.log("Delete Todo: ", response.data);
-        dispatch(removeTodo(id));
       } else {
         throw new Error("Failed in Delete!!!");
       }
