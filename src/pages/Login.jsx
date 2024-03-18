@@ -80,7 +80,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center bg-gray-300 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col  bg-gray-300 py-12 px-4 sm:px-6 lg:px-8">
       {successMsg ? (
         <p className="text-xl font-medium text-green-600 text-center mb-8">
           ---- Login Successful ----
@@ -99,7 +99,7 @@ const Login = () => {
       <div className="flex justify-center">
         <div className="w-full sm:max-w-md space-y-8">
           <div>
-            <h2 className="mt-16 mb-16 text-center text-4xl font-extrabold text-gray-900">
+            <h2 className="mt-8 mb-32 text-center text-4xl font-extrabold text-gray-900">
               Welcome Back!
             </h2>
           </div>
