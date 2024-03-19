@@ -133,9 +133,8 @@ function Todo() {
       <ul className="list-none mb-16">
         {todos.map((todo) => (
           <li
-            className="mt-4 mx-36 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
+            className="mt-4 mx-3 md:mx-36 flex  md:flex-row md:justify-between items-center bg-zinc-800 px-1.5 py-1.5 md:py-2 rounded justify-between "
             key={todo.id}
-            // key={nanoid()}
           >
             {editingTodoId === todo.id ? (
               <input
@@ -144,17 +143,17 @@ function Todo() {
                 value={editedText}
                 onChange={(e) => setEditedText(e.target.value)}
                 onKeyDown={(e) => setUpdateOnEnter(e, todo.id)}
-                className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField"
+                className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField md:w-auto"
               />
             ) : (
-              <div className="text-white">{todo.text}</div>
+              <div className="text-white w-auto ">{todo.text}</div>
             )}
-            <div className="flex">
+            <div className="flex  md:flex-row md:flex-wrap md:items-center justify-center ">
               {editingTodoId === todo.id ? (
                 <button
                   type="button"
                   onClick={() => saveEditHandler(todo.id)}
-                  className="text-white bg-green-500  text-sm  text-center me-7 mb-0 focus:outline-none align-middle hover:bg-green-600 justify-end font-bold py-2 px-5 rounded"
+                  className="text-white bg-green-500 text-sm text-center me-2 mb-2 md:mb-0 focus:outline-none align-middle hover:bg-green-600 justify-end font-bold  rounded sm-justify-end"
                 >
                   Update
                 </button>
@@ -162,16 +161,15 @@ function Todo() {
                 <button
                   type="button"
                   onClick={() => updateHandler(todo.id, todo.text)}
-                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  text-sm  text-center me-7 mb-0 align-middle justify-end bg-blue-500 hover:bg-blue-700 font-bold py-2 px-5 rounded"
+                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-sm text-center me-2 mb-2 md:mb-0 align-middle  bg-blue-500 hover:bg-blue-700 font-bold sm-py-2 px-1.5 py-1 rounded md:py-2 md:px-4 sm-justify-end "
                 >
                   Edit
                 </button>
               )}
 
               <button
-                // onClick={() => dispatch(removeTodo(todo.id))}
                 onClick={() => deleteHandler(todo.id)}
-                className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+                className="text-white bg-red-500 border-0   focus:outline-none hover:bg-red-600  text-md md:ml-2 sm-py-0  pt-0 pb-0  sm-my-2 sm-mx-1 sm-justify-end text-center me-0.5 mb-2 md:mb-0 align-middle    font-bold sm-py-2 px-1.5 py-1 rounded md:py-2 md:px-4 sm-justify-end"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +177,7 @@ function Todo() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-5"
                 >
                   <path
                     strokeLinecap="round"
