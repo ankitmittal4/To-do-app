@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -13,6 +14,8 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
   const [loginError, setLoginError] = useState("Account Not Found!!!");
+
+  const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -58,8 +61,11 @@ const Login = () => {
           dispatch(setImageURL(imageURL));
           localStorage.setItem("image", imageURL);
         }
-
-        navigate("/");
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+          navigate("/");
+        }, 1500);
       }
       // else {
       //   setErrorMsg(true);
@@ -74,102 +80,119 @@ const Login = () => {
         setErrorMsg(true);
         setSuccessMsg(false);
         setLoginError(error.response.data.message);
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 3000);
       }
       //displays error msg to user
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col  bg-gray-300 py-8 px-4 sm:px-6 lg:px-8">
-      {successMsg ? (
-        <p className="text-xl font-medium text-green-600 text-center">
-          ---- Login Successful ----
-          <Link
-            to="/"
-            className="font-medium text-blue-600 hover:text-blue-500"
-          ></Link>
-        </p>
-      ) : errorMsg ? (
-        <p className="text-xl font-medium text-red-500 text-center ">
-          {loginError} !!!
-        </p>
-      ) : (
-        <p></p>
-      )}
-      <div className="flex justify-center">
-        <div className="w-full sm:max-w-md space-y-8">
-          <div>
-            <h2 className="mt-7 mb-32 text-center text-4xl font-extrabold text-gray-900">
-              Welcome Back!
-            </h2>
+    <>
+      <div className="min-h-screen   bg-gray-300 py-1 px-4 sm:px-6 lg:px-4">
+        {/* Animation message */}
+        {showMessage && (
+          <div className="absolute top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center">
+            {successMsg ? (
+              <p className="text-1xl font-medium text-white sm-text-center mt-4 animate-slide-in-right">
+                <span className="px-4 py-3 rounded bg-green-500 shadow-lg  shadow-green-500/50">
+                  Login Successful
+                </span>
+                <Link
+                  to="/"
+                  className="font-medium text-blue-600 hover:text-blue-500"
+                ></Link>
+              </p>
+            ) : errorMsg ? (
+              <p className="text-1xl font-medium text-white sm-text-center mt-4 animate-slide-in-right">
+                <span className="bg-red-500 px-12 py-3 rounded shadow-lg  shadow-red-500/50">
+                  {loginError}
+                </span>
+              </p>
+            ) : (
+              <p></p>
+            )}
           </div>
-          <form className="mt-7 space-y-6" onSubmit={handleSubmit}>
-            <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm mb-4"
-                  placeholder="Email address"
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
+        )}
 
-            <div className="flex items-center justify-end text-sm">
-              <a
-                href="#"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Forgot password?
-              </a>
-            </div>
-
+        {/* Login div starts*/}
+        <div className="flex justify-center mt-20">
+          <div className="w-full sm:max-w-md space-y-8">
             <div>
-              <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-8"
-              >
-                Login
-              </button>
+              <h2 className="mt-7 mb-16 text-center text-4xl font-extrabold text-gray-900">
+                Welcome Back!
+              </h2>
             </div>
-            <div className="text-center">
-              <span>New User? </span>
-              <Link
-                to="/signup"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Create an account
-              </Link>
-            </div>
-          </form>
+            <form className="mt-7 space-y-6" onSubmit={handleSubmit}>
+              <input type="hidden" name="remember" defaultValue="true" />
+              <div className="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm mb-4"
+                    placeholder="Email address"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="sr-only">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={handlePasswordChange}
+                    className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    placeholder="Password"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end text-sm">
+                <a
+                  href="#"
+                  className="font-medium text-blue-600 hover:text-blue-500"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-8"
+                >
+                  Login
+                </button>
+              </div>
+              <div className="text-center">
+                <span>New User? </span>
+                <Link
+                  to="/signup"
+                  className="font-medium text-blue-600 hover:text-blue-500"
+                >
+                  Create an account
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
