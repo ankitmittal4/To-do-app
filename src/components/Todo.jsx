@@ -133,7 +133,7 @@ function Todo() {
       <ul className="list-none mb-16">
         {todos.map((todo) => (
           <li
-            className="mt-4 mx-3 md:mx-36 flex  md:flex-row md:justify-between items-center bg-zinc-800 px-1.5 py-1.5 md:py-2 rounded justify-between "
+            className="mt-4 mx-3 md:mx-36 flex  md:flex-row md:justify-between items-center bg-zinc-800 px-1.5 py-1.5 md:py-2 rounded justify-between  "
             key={todo.id}
           >
             {editingTodoId === todo.id ? (
@@ -161,7 +161,7 @@ function Todo() {
                 <button
                   type="button"
                   onClick={() => updateHandler(todo.id, todo.text)}
-                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-sm text-center me-2 mb-2 md:mb-0 align-middle  bg-blue-500 hover:bg-blue-700 font-bold sm-py-2 px-1.5 py-1 rounded md:py-2 md:px-4 sm-justify-end "
+                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 text-sm text-center me-3.5 mb-2 md:mb-0 align-middle  bg-blue-500 hover:bg-blue-700 font-bold sm-py-2 px-2.5  py-1 rounded md:py-2 md:px-4 sm-justify-end "
                 >
                   Edit
                 </button>
@@ -169,7 +169,7 @@ function Todo() {
 
               <button
                 onClick={() => deleteHandler(todo.id)}
-                className="text-white bg-red-500 border-0   focus:outline-none hover:bg-red-600  text-md md:ml-2 sm-py-0  pt-0 pb-0  sm-my-2 sm-mx-1 sm-justify-end text-center me-0.5 mb-2 md:mb-0 align-middle    font-bold sm-py-2 px-1.5 py-1 rounded md:py-2 md:px-4 sm-justify-end"
+                className="text-white bg-red-500 border-0   focus:outline-none hover:bg-red-600  text-md md:ml-2 sm-py-0  pt-0 pb-0  sm-my-2 sm-mx-1 sm-justify-end text-center me-0.5 mb-2 md:mb-0 align-middle    font-bold sm-py-2 px-2 py-1 rounded md:py-2 md:px-4 sm-justify-end"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
