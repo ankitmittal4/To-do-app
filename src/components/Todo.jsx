@@ -133,7 +133,7 @@ function Todo() {
       <ul className="list-none mb-16">
         {todos.map((todo) => (
           <li
-            className="mt-4 mx-3 md:mx-36 flex  md:flex-row md:justify-between items-center bg-zinc-800 px-1.5 py-1.5 md:py-2 rounded justify-between  "
+            className="mt-4 mx-3 md:mx-36 flex  md:flex-row md:justify-between items-center bg-zinc-800 px-1.5 py-2 md:py-2 rounded justify-between  "
             key={todo.id}
           >
             {editingTodoId === todo.id ? (
