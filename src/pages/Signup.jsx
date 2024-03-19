@@ -139,7 +139,7 @@ const Signup = () => {
           </div>
         </div>
         <div className="max-w-md w-full space-y-1 mx-auto">
-          <div className="flex justify-center lg:justify-center mb-1">
+          <div className="flex justify-center lg:justify-center mb-1  lg:mt-3">
             <img
               src={imageUrl}
               alt="Random Profile"
