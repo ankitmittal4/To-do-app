@@ -128,7 +128,7 @@ const Signup = () => {
       )}
       <div className="flex flex-col lg:flex-row justify-evenly bg-gray-300 py-3">
         <div className="flex flex-col justify-top lg:w-1/3">
-          <h2 className="mt-0 lg:mt-16 mb-10 text-center lg:text-left text-3xl lg:text-5xl font-extrabold text-gray-900  ">
+          <h2 className="mt-0 lg:mt-16 mb-10 text-center lg:text-left text-3xl lg:text-5xl font-extrabold text-gray-900">
             Create an Account
           </h2>
           <div className="flex justify-center lg:justify-start">
