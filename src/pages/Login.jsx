@@ -65,7 +65,7 @@ const Login = () => {
         setTimeout(() => {
           setShowMessage(false);
           navigate("/");
-        }, 1500);
+        }, 1000);
       }
       // else {
       //   setErrorMsg(true);
@@ -83,7 +83,7 @@ const Login = () => {
         setShowMessage(true);
         setTimeout(() => {
           setShowMessage(false);
-        }, 3000);
+        }, 2000);
       }
       //displays error msg to user
     }

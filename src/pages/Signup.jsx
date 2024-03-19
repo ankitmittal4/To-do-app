@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../features/todo/todoSlice";
@@ -16,6 +17,8 @@ const Signup = () => {
   );
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+
+  const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -95,7 +98,12 @@ const Signup = () => {
         setErrorMsg(false);
         dispatch(setToken(token));
         localStorage.setItem("token", token);
-        navigate("/");
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+          navigate("/");
+        }, 1000);
+        // navigate("/");
       }
 
       //redirect or display success msg
@@ -105,29 +113,41 @@ const Signup = () => {
       if (error.response.request.status === 400) {
         setErrorMsg(true);
         setSuccessMsg(false);
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 2000);
       }
       //displays error msg to user
     }
   };
   return (
-    <div className="min-h-screen bg-gray-300 px-4 sm:px-6 lg:px-8 py-3">
-      {successMsg ? (
-        <p className="text-xl font-medium text-green-600 inline-block">
-          ---- Sign Up Successful ----
-          <Link
-            to="/"
-            className="font-medium text-blue-600 hover:text-blue-500"
-          ></Link>
-        </p>
-      ) : errorMsg ? (
-        <p className="text-xl font-medium text-red-500  inline-block">
-          Email already exists !!!
-        </p>
-      ) : (
-        <p></p>
+    <div className="min-h-screen bg-gray-300 px-4 sm:px-6 lg:px-8 py-0">
+      {showMessage && (
+        <div className="fixed top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center max-h-20">
+          {successMsg ? (
+            <p className="text-1xl font-medium text-white sm-text-center mt-12 animate-slide-in-right">
+              <span className="px-4 py-3 rounded bg-green-500 shadow-lg  shadow-green-500/50">
+                Signup Successful
+              </span>
+              <Link
+                to="/"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              ></Link>
+            </p>
+          ) : errorMsg ? (
+            <p className="text-1xl font-medium text-white sm-text-center mt-12 animate-slide-in-right ">
+              <span className="bg-red-500 px-12 py-3 rounded shadow-lg  shadow-red-500/50 opacity-80">
+                Email already exists
+              </span>
+            </p>
+          ) : (
+            <p></p>
+          )}
+        </div>
       )}
       <div className="flex flex-col lg:flex-row justify-evenly bg-gray-300 py-3">
-        <div className="flex flex-col justify-top lg:w-1/3 lg:ml-12">
+        <div className="flex flex-col justify-top lg:w-1/3 lg:ml-12 mb-6">
           <h2 className="mt-0 lg:mt-10 mb-10 lg:mb-12 text-center lg:text-center text-3xl lg:text-5xl font-extrabold text-gray-900">
             Create an Account
           </h2>
