@@ -94,7 +94,7 @@ const Login = () => {
       <div className="min-h-screen   bg-gray-300 py-1 px-4 sm:px-6 lg:px-4">
         {/* Animation message */}
         {showMessage && (
-          <div className="absolute top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center">
+          <div className="fixed top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center max-h-20">
             {successMsg ? (
               <p className="text-1xl font-medium text-white sm-text-center mt-4 animate-slide-in-right">
                 <span className="px-4 py-3 rounded bg-green-500 shadow-lg  shadow-green-500/50">
@@ -106,8 +106,8 @@ const Login = () => {
                 ></Link>
               </p>
             ) : errorMsg ? (
-              <p className="text-1xl font-medium text-white sm-text-center mt-4 animate-slide-in-right">
-                <span className="bg-red-500 px-12 py-3 rounded shadow-lg  shadow-red-500/50">
+              <p className="text-1xl font-medium text-white sm-text-center mt-4 animate-slide-in-right ">
+                <span className="bg-red-500 px-12 py-3 rounded shadow-lg  shadow-red-500/50 ">
                   {loginError}
                 </span>
               </p>

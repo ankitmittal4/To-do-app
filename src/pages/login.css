@@ -1,7 +1,7 @@
 @keyframes slideInRight {
     from {
       transform: translateX(100%);
-      opacity: 1;
+      opacity: 0; /* Start with opacity 0 for fade-in effect */
     }
     to {
       transform: translateX(0);
@@ -10,6 +10,6 @@
   }
   
   .animate-slide-in-right {
-    animation: slideInRight .27s ease-in-out;
+    animation: slideInRight .3s ease-out; /* Adjusted duration and timing function */
   }
   
