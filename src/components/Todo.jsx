@@ -143,10 +143,12 @@ function Todo() {
                 value={editedText}
                 onChange={(e) => setEditedText(e.target.value)}
                 onKeyDown={(e) => setUpdateOnEnter(e, todo.id)}
-                className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField md:w-auto"
+                className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out editField md:w-auto lg:w-4/5"
               />
             ) : (
-              <div className="text-white w-auto ">{todo.text}</div>
+              <div className="text-white w-auto lg:ml-3 sm:ml-2">
+                {todo.text}
+              </div>
             )}
             <div className="flex  md:flex-row md:flex-wrap md:items-center justify-center ">
               {editingTodoId === todo.id ? (
@@ -169,7 +171,7 @@ function Todo() {
 
               <button
                 onClick={() => deleteHandler(todo.id)}
-                className="text-white bg-red-500 border-0   focus:outline-none hover:bg-red-600  text-md md:ml-2 sm-py-0  pt-0 pb-0  sm-my-2 sm-mx-1 sm-justify-end text-center me-0.5 mb-0 md:mb-0 align-middle    font-bold sm-py-2 px-2 py-1 rounded md:py-2 md:px-4 sm-justify-end"
+                className="text-white bg-red-500 border-0   focus:outline-none hover:bg-red-600  text-md md:ml-2 sm-py-0  pt-0 pb-0  sm-my-2 sm-mx-1 sm-justify-end text-center me-0.5 mb-0 md:mb-0 align-middle    font-bold sm-py-2 px-2 py-1 rounded md:py-2 md:px-4 sm-justify-end lg:mr-3 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
