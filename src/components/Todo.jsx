@@ -153,7 +153,7 @@ function Todo() {
                 <button
                   type="button"
                   onClick={() => saveEditHandler(todo.id)}
-                  className="text-white bg-green-500 text-sm text-center me-2 mb-2 md:mb-0 focus:outline-none align-middle hover:bg-green-600 justify-end font-bold  rounded sm-justify-end"
+                  className="text-white bg-green-500  hover:bg-green-600 focus:ring-green-300 dark:focus:ring-green-800 justify-end sm-justify-end  bg-gradient-to-r    hover:bg-gradient-to-br focus:ring-4 focus:outline-none   text-sm text-center me-3.5 mb-0 md:mb-0 align-middle   font-bold sm-py-2 px-1.5  py-1.5 rounded md:py-2 md:px-4 sm-justify-end ml-2.5"
                 >
                   Update
                 </button>
