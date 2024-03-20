@@ -7,6 +7,9 @@ import { setToken } from "../features/todo/todoSlice";
 import { setActiveUser } from "../features/todo/todoSlice";
 import { setImageURL } from "../features/todo/todoSlice";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +19,8 @@ const Login = () => {
   const [loginError, setLoginError] = useState("Account Not Found!!!");
 
   const [showMessage, setShowMessage] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,6 +36,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     // console.log("Email:", email);
     // console.log("Password:", password);
 
@@ -86,12 +92,24 @@ const Login = () => {
         }, 2000);
       }
       //displays error msg to user
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div className="min-h-screen   bg-gray-300 py-1 px-4 sm:px-6 lg:px-4">
+        {loading && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              spin
+              className="text-white text-4xl"
+            />
+          </div>
+        )}
+
         {/* Animation message */}
         {showMessage && (
           <div className="fixed top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center max-h-20">
@@ -163,12 +181,12 @@ const Login = () => {
               </div>
 
               <div className="flex items-center justify-end text-sm">
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="font-medium text-blue-600 hover:text-blue-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
 
               <div>

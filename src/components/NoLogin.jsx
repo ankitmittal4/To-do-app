@@ -20,10 +20,10 @@ function NoLogin() {
         </Link>
       </p>
 
-      <div className="flex justify-evenly mt-12">
+      <div className="flex justify-evenly mt-12 ">
         <img
           src="https://www.stock-app.info/media/wp-content/uploads/2022/06/ToDo-%E3%83%AA%E3%82%B9%E3%83%88-%E7%B6%9A%E3%81%8B%E3%81%AA%E3%81%84.jpg"
-          className=" rounded-md h-auto w-1/3"
+          className=" rounded-md h-auto w-10/12 sm:w-1/3 lg:w-1/3 md:w-1/3"
         />
       </div>
     </div>

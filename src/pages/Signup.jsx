@@ -7,6 +7,9 @@ import { setToken } from "../features/todo/todoSlice";
 import { setImageURL } from "../features/todo/todoSlice";
 import { setActiveUser } from "../features/todo/todoSlice";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -19,6 +22,8 @@ const Signup = () => {
   const [errorMsg, setErrorMsg] = useState(false);
 
   const [showMessage, setShowMessage] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,6 +55,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     console.log("Username:", username);
     console.log("Email:", email);
     console.log("Password:", password);
@@ -119,10 +126,22 @@ const Signup = () => {
         }, 2000);
       }
       //displays error msg to user
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <div className="min-h-screen bg-gray-300 px-4 sm:px-6 lg:px-8 py-0">
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <FontAwesomeIcon
+            icon={faSpinner}
+            spin
+            className="text-white text-4xl"
+          />
+        </div>
+      )}
+
       {showMessage && (
         <div className="fixed top-0 right-0 mx-auto w-full max-w-sm mt-4 z-10 flex justify-center max-h-20">
           {successMsg ? (
