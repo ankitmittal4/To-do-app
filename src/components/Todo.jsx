@@ -16,7 +16,7 @@ function Todo() {
   const fetchUserTodos = async () => {
     try {
       const response = await axios.post(
-        "https://to-do-0j63.onrender.com/api/todo/list/",
+        "https://to-do-u5b3.onrender.com/api/todo/list/",
         {
           page: 1,
           limit: 50,
@@ -56,7 +56,7 @@ function Todo() {
     console.log("Todo id: ", id);
     try {
       const response = await axios.post(
-        "https://to-do-0j63.onrender.com/api/todo/update/",
+        "https://to-do-u5b3.onrender.com/api/todo/update/",
         { todoId: id, text: editedText },
         {
           headers: {
