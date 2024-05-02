@@ -18,7 +18,7 @@ function AddTodo() {
 
     try {
       const response = await axios.post(
-        "https://to-do-0j63.onrender.com/api/todo/add/",
+        "https://to-do-u5b3.onrender.com/api/todo/add/",
         { text: input },
         {
           headers: {
