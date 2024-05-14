@@ -71,7 +71,6 @@ function Todo() {
         // setEditingTodoId(null);
         // setEditedText("");
       } else {
-        // console.log("status: ", response.status);
         throw new Error("Failed in Update!!!");
       }
     } catch (error) {
