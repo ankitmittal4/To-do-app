@@ -72,12 +72,12 @@ const Signup = () => {
 
       const response = await axios.post(
         "https://to-do-u5b3.onrender.com/api/user/signup",
-        formData,
-        {
-          Headers: {
-            "content-Type": "multipart/form-data",
-          },
-        }
+        formData
+        // {
+        //   Headers: {
+        //     "content-Type": "multipart/form-data",
+        //   },
+        // }
       );
       console.log("Signup successful : ", response.data);
       // console.log("Signup Token : ", response.data.data.token);
